@@ -4025,7 +4025,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "99% coprocessor scan efficiency",
+          "title": "99% coprocessor scan inefficiency",
           "tooltip": {
             "msResolution": false,
             "shared": true,
