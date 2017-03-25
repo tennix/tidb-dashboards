@@ -11,38 +11,76 @@
   ],
   "__requires": [
     {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "4.1.2"
-    },
-    {
       "type": "panel",
       "id": "graph",
       "name": "Graph",
       "version": ""
     },
     {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
       "type": "panel",
       "id": "singlestat",
       "name": "Singlestat",
       "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.0.1"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
     }
   ],
+  "id": null,
+  "title": "TiDB-TiKV",
+  "tags": [],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "sharedCrosshair": false,
+  "hideControls": false,
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "templating": {
+    "list": []
+  },
   "annotations": {
     "list": []
   },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": false,
-  "id": null,
+  "refresh": "1m",
+  "schemaVersion": 13,
+  "version": 4,
   "links": [
     {
       "icon": "external link",
@@ -50,11 +88,10 @@
       "type": "dashboards"
     }
   ],
-  "refresh": "1m",
+  "gnetId": null,
   "rows": [
     {
-      "collapse": false,
-      "height": "250px",
+      "title": "Server",
       "panels": [
         {
           "aliasColors": {},
@@ -100,7 +137,7 @@
               "legendFormat": "{{instance}}-{{job}}",
               "metric": "tikv_pd_heartbeat_tick_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "sum(tikv_pd_heartbeat_tick_total{type=\"leader\"}) ",
@@ -185,7 +222,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{instance}}-{{job}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -263,7 +300,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -342,7 +379,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{job}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -395,7 +432,7 @@
                   "type": "and"
                 },
                 "query": {
-                  "datasourceId": 1,
+                  "datasourceId": 3,
                   "model": {
                     "expr": "sum(rate(tikv_channel_full_total[1m])) by (type, job)",
                     "intervalFactor": 2,
@@ -465,7 +502,7 @@
               "legendFormat": "{{job}}-{{type}}",
               "metric": "",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [
@@ -555,7 +592,7 @@
               "legendFormat": "{{job}}-{{type}}-to-{{store_id}}",
               "metric": "tikv_server_raft_store_msg_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -633,7 +670,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_region_written_keys_bucket",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -712,7 +749,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_regi",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -791,7 +828,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_region_written_keys_bucket",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -831,16 +868,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Server",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
     },
     {
-      "collapse": true,
-      "height": "250px",
+      "title": "Network",
       "panels": [
         {
           "aliasColors": {},
@@ -937,7 +974,7 @@
                   "type": "and"
                 },
                 "query": {
-                  "datasourceId": 1,
+                  "datasourceId": 3,
                   "model": {
                     "expr": "sum(tikv_server_connection_total) by (job)",
                     "intervalFactor": 2,
@@ -1052,16 +1089,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Network",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": "250px",
+      "title": "Raft",
       "panels": [
         {
           "alert": {
@@ -1077,7 +1114,7 @@
                   "type": "and"
                 },
                 "query": {
-                  "datasourceId": 1,
+                  "datasourceId": 3,
                   "model": {
                     "expr": "histogram_quantile(0.99, sum(rate(tikv_raftstore_raft_process_duration_secs_bucket{type='ready'}[1m])) by (le, job))",
                     "intervalFactor": 2,
@@ -2050,16 +2087,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Raft",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": "250px",
+      "title": "Raft Ready",
       "panels": [
         {
           "aliasColors": {},
@@ -2100,7 +2137,7 @@
               "legendFormat": " ",
               "metric": "",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2177,7 +2214,7 @@
               "intervalFactor": 2,
               "legendFormat": " ",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2255,7 +2292,7 @@
               "legendFormat": " ",
               "metric": "",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2332,7 +2369,7 @@
               "intervalFactor": 2,
               "legendFormat": " ",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2410,7 +2447,7 @@
               "legendFormat": "",
               "metric": "tikv_raftstore_request_wait_time_duration_secs_bucket",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2487,7 +2524,7 @@
               "intervalFactor": 2,
               "legendFormat": "",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2527,16 +2564,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Raft Ready",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": "250px",
+      "title": "Storage",
       "panels": [
         {
           "aliasColors": {},
@@ -2578,7 +2615,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2659,7 +2696,7 @@
               "legendFormat": "{{type}}-{{status}}",
               "metric": "tikv_raftstore_raft_process_duration_secs_bucket",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2737,7 +2774,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2816,7 +2853,7 @@
               "legendFormat": "{{type}}",
               "metric": "tikv_storage_engine_async_request_duration_seconds_bucket",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2856,16 +2893,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Storage",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": "250px",
+      "title": "Scheduler",
       "panels": [
         {
           "aliasColors": {},
@@ -2907,7 +2944,7 @@
               "legendFormat": "{{job}}",
               "metric": "",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -2985,7 +3022,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -3064,7 +3101,7 @@
               "legendFormat": "{{type}}",
               "metric": "tikv_scheduler_command_duration_seconds_bucket",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -3086,7 +3123,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -3138,17 +3175,17 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.9999, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le,type))",
+              "expr": "histogram_quantile(0.95, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le,type))",
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "99.99% scheduler command duration",
+          "title": "95% scheduler command duration",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -3164,7 +3201,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -3221,7 +3258,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -3299,7 +3336,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -3379,7 +3416,7 @@
               "legendFormat": "{{type}}",
               "metric": "tikv_scheduler_kv_command_key_read_bucket",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -3419,16 +3456,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Scheduler",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": "250px",
+      "title": "Coprocessor",
       "panels": [
         {
           "aliasColors": {},
@@ -4138,16 +4175,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Coprocessor",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": "250px",
+      "title": "GC",
       "panels": [
         {
           "aliasColors": {},
@@ -4445,7 +4482,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -4618,16 +4655,16 @@
           "valueName": "current"
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "GC",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": "250px",
+      "title": "Snapshot",
       "panels": [
         {
           "aliasColors": {},
@@ -5037,16 +5074,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Snapshot",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": 250,
+      "title": "Task",
       "panels": [
         {
           "aliasColors": {},
@@ -5206,16 +5243,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Task",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": 250,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": 250,
+      "title": "Thread CPU",
       "panels": [
         {
           "alert": {
@@ -5231,7 +5268,7 @@
                   "type": "and"
                 },
                 "query": {
-                  "datasourceId": 1,
+                  "datasourceId": 3,
                   "model": {
                     "expr": "sum(rate(tikv_thread_cpu_seconds_total{name=~\"raftstore_.*\"}[1m])) by (job, name)",
                     "intervalFactor": 2,
@@ -5300,7 +5337,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_thread_cpu_seconds_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [
@@ -5386,7 +5423,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_thread_cpu_seconds_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -5464,7 +5501,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_thread_cpu_seconds_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -5544,7 +5581,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_thread_cpu_seconds_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -5623,7 +5660,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{job}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -5703,7 +5740,7 @@
               "legendFormat": "{{job}}-{{tid}}",
               "metric": "tikv_thread_cpu_seconds_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -5781,7 +5818,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_thread_cpu_seconds_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -5861,7 +5898,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_thread_cpu_seconds_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [
@@ -5954,7 +5991,7 @@
               "legendFormat": "{{job}}",
               "metric": "tikv_thread_cpu_seconds_total",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -5994,16 +6031,16 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Thread CPU",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": 250,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     },
     {
-      "collapse": true,
-      "height": 250,
+      "title": "Rocksdb",
       "panels": [
         {
           "aliasColors": {},
@@ -6041,7 +6078,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{job}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6049,6 +6086,7 @@
           "timeShift": null,
           "title": "block cache hit rate",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6116,7 +6154,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{job}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6124,6 +6162,7 @@
           "timeShift": null,
           "title": "memtable hit rate",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6191,21 +6230,21 @@
               "intervalFactor": 2,
               "legendFormat": "average",
               "refId": "A",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "avg(tikv_engine_get_micro_seconds{type=\"get_percentile99\"})",
               "intervalFactor": 2,
               "legendFormat": "percentile99",
               "refId": "B",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "avg(tikv_engine_get_micro_seconds{type=\"get_percentile95\"})",
               "intervalFactor": 2,
               "legendFormat": "percentile95",
               "refId": "C",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6213,6 +6252,7 @@
           "timeShift": null,
           "title": "get",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6279,21 +6319,21 @@
               "intervalFactor": 2,
               "legendFormat": "average",
               "refId": "A",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "avg(tikv_engine_write_micro_seconds{type=\"write_percentile99\"})",
               "intervalFactor": 2,
               "legendFormat": "percentile99",
               "refId": "B",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "avg(tikv_engine_write_micro_seconds{type=\"write_percentile95\"})",
               "intervalFactor": 2,
               "legendFormat": "percentile95",
               "refId": "C",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6301,6 +6341,7 @@
           "timeShift": null,
           "title": "write",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6367,21 +6408,21 @@
               "intervalFactor": 2,
               "legendFormat": "average",
               "refId": "A",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "avg(tikv_engine_seek_micro_seconds{type=\"seek_percentile99\"})",
               "intervalFactor": 2,
               "legendFormat": "percentile99",
               "refId": "B",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "avg(tikv_engine_seek_micro_seconds{type=\"seek_percentile95\"})",
               "intervalFactor": 2,
               "legendFormat": "percentile95",
               "refId": "C",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6389,6 +6430,7 @@
           "timeShift": null,
           "title": "seek",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6427,10 +6469,12 @@
           "fill": 0,
           "id": 85,
           "legend": {
+            "alignAsTable": true,
             "avg": false,
             "current": true,
             "max": true,
             "min": false,
+            "rightSide": true,
             "show": true,
             "total": false,
             "values": true
@@ -6459,7 +6503,7 @@
               "intervalFactor": 2,
               "legendFormat": "bytes_read",
               "refId": "A",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "sum(rate(tikv_engine_flow_bytes{type=\"keys_read\"}[1m]))",
@@ -6467,14 +6511,14 @@
               "intervalFactor": 2,
               "legendFormat": "keys_read",
               "refId": "B",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "sum(rate(tikv_engine_flow_bytes{type=\"iter_bytes_read\"}[1m]))",
               "intervalFactor": 2,
               "legendFormat": "iter_bytes_read",
               "refId": "C",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6482,6 +6526,7 @@
           "timeShift": null,
           "title": "read flow",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6520,10 +6565,12 @@
           "fill": 1,
           "id": 86,
           "legend": {
+            "alignAsTable": true,
             "avg": false,
             "current": true,
             "max": true,
             "min": false,
+            "rightSide": true,
             "show": true,
             "total": false,
             "values": true
@@ -6552,7 +6599,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             },
             {
               "expr": "sum(rate(tikv_engine_flow_bytes{type=\"keys_written\"}[1m])) by (type)",
@@ -6560,7 +6607,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{type}}",
               "refId": "B",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6568,6 +6615,7 @@
           "timeShift": null,
           "title": "write flow",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6605,10 +6653,12 @@
           "fill": 1,
           "id": 87,
           "legend": {
+            "alignAsTable": true,
             "avg": false,
             "current": false,
             "max": false,
             "min": false,
+            "rightSide": true,
             "show": true,
             "total": false,
             "values": false
@@ -6631,7 +6681,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{job}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6639,6 +6689,7 @@
           "timeShift": null,
           "title": "stall",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6706,12 +6757,13 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(tikv_engine_bloom_efficiency[1m])) by (type)",
+              "expr": "sum(rate(tikv_engine_pending_compaction_bytes[1m])) by (job)",
               "hide": false,
               "intervalFactor": 2,
-              "legendFormat": "{{type}}",
+              "legendFormat": "{{job}}",
+              "metric": "tikv_engine_pending_compaction_bytes",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6719,6 +6771,7 @@
           "timeShift": null,
           "title": "pending compaction bytes",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6791,7 +6844,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{job}}",
               "refId": "A",
-              "step": 60
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -6799,6 +6852,7 @@
           "timeShift": null,
           "title": "compaction flow",
           "tooltip": {
+            "msResolution": false,
             "shared": true,
             "sort": 0,
             "value_type": "individual"
@@ -6830,50 +6884,13 @@
           ]
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
       "showTitle": true,
-      "title": "Rocksdb",
-      "titleSize": "h6"
+      "titleSize": "h6",
+      "height": 250,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
-  "tags": [],
-  "templating": {
-    "list": []
-  },
-  "time": {
-    "from": "now-12h",
-    "to": "now"
-  },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
-  "timezone": "browser",
-  "title": "TiDB-Cluster-TiKV",
-  "version": 5
+  ]
 }
