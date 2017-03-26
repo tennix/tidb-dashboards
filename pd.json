@@ -870,7 +870,7 @@
             {
               "expr": "pd_cluster_status{instance=\"$instance\",type=\"store_max_diff_storage_ratio\"}",
               "intervalFactor": 2,
-              "legendFormat": "\bstore balance ratio",
+              "legendFormat": "store balance ratio",
               "refId": "A",
               "step": 4
             }
