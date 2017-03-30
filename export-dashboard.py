@@ -50,6 +50,11 @@ def export_dashboard(url, auth, dashboard_name, kind, dashboard_file):
                 templating['current'] = {}
                 templating['options'] = []
             templating['datasource'] = '${DS_TIDB-CLUSTER}'
+    if '__requires' not in dashboard:
+        dashboard['__requires'] = [
+            {'type': 'grafana', 'id': 'grafana', 'name': 'Grafana', 'version': '4.0.1'},
+            {'type': 'datasource', 'id': 'prometheus', 'name': 'Prometheus', 'version': '1.0.0'},
+        ]
     if 'annotations' in dashboard:
         for annotation in dashboard['annotations']['list']:
             annotation['datasource'] = '${DS_TIDB-CLUSTER}'
