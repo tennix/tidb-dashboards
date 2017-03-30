@@ -69,4 +69,4 @@ if __name__ == '__main__':
     else:
         dashboard_file = '{}.json'.format(kind)
         name = dashboards[kind]
-        export_dashboard(url, auth, name, url, kind, dashboard_file)
+        export_dashboard(url, auth, name, kind, dashboard_file)
